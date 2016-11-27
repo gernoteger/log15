@@ -12,34 +12,15 @@ import (
 )
 
 // Handler sends logs to Graylog in GELF.
-type Handler struct {
+type GelfHandler struct {
 	gelfWriter *Writer
 	host       string
 }
 
-// New creates a log15 handler that emits GELF to gelfAddr. It is already wrapped
-// in log15's LazyHandler and SyncHandler helpers. Its error is non-nil if there
-// is a problem creating the GELF writer or determining our hostname.
-func New(gelfAddr string) (log15.Handler, error) {
-	w, err := NewWriter(gelfAddr)
-	if err != nil {
-		return nil, err
-	}
-
-	host, err := os.Hostname()
-	if err != nil {
-		return nil, err
-	}
-
-	return log15.CallerFileHandler(log15.LazyHandler(log15.SyncHandler(Handler{
-		gelfWriter: w,
-		host:       host,
-	}))), nil
-}
 
 // like New but panics if error occurs
 func MustNew(gelfAddr string) log15.Handler {
-	h, err := New(gelfAddr)
+	h, err := NewGelfHandler(gelfAddr)
 	if err != nil {
 		panic(err)
 	}
@@ -47,7 +28,7 @@ func MustNew(gelfAddr string) log15.Handler {
 }
 
 // Log forwards a log message to the specified receiever.
-func (h Handler) Log(r *log15.Record) error {
+func (h GelfHandler) Log(r *log15.Record) error {
 	short, full := shortAndFull(r.Msg)
 
 	ctx := ctxToMap(r.Ctx)

@@ -9,6 +9,8 @@ import (
 	"sync"
 
 	"github.com/go-stack/stack"
+	"github.com/gernoteger/log15/gelf"
+	"github.com/inconshreveable/log15"
 )
 
 // A Logger prints its log records by writing to a Handler.
@@ -147,6 +149,27 @@ func FilterHandler(fn func(r *Record) bool, h Handler) Handler {
 		return nil
 	})
 }
+
+// New creates a log15 handler that emits GELF to gelfAddr. It is already wrapped
+// in log15's LazyHandler and SyncHandler helpers. Its error is non-nil if there
+// is a problem creating the GELF writer or determining our hostname.
+func GelfHandler(gelfAddr string) (log15.Handler, error) {
+	w, err := gelf.NewWriter(gelfAddr)
+	if err != nil {
+		return nil, err
+	}
+
+	host, err := os.Hostname()
+	if err != nil {
+		return nil, err
+	}
+
+	return log15.CallerFileHandler(log15.LazyHandler(log15.SyncHandler(GelfHandler{
+		gelfWriter: w,
+		host:       host,
+	}))), nil
+}
+
 
 // MatchFilterHandler returns a Handler that only writes records
 // to the wrapped Handler if the given key in the logged
