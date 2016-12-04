@@ -8,7 +8,7 @@ import (
 	"net/url"
 
 	"github.com/gernoteger/mapstructure-hooks"
-	"github.com/inconshreveable/log15"
+	"github.com/gernoteger/log15"
 )
 
 // Just the selector for the Handler!

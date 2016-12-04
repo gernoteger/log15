@@ -9,7 +9,7 @@ import (
 	"sync"
 
 	"github.com/go-stack/stack"
-	"github.com/inconshreveable/log15/gelf"
+	"github.com/gernoteger/log15/gelf"
 )
 
 // A Logger prints its log records by writing to a Handler.

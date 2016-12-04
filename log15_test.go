@@ -14,7 +14,7 @@ import (
 	"time"
 
 	"github.com/go-stack/stack"
-	"github.com/inconshreveable/log15/gelf"
+	"github.com/gernoteger/log15/gelf"
 )
 
 func testHandler() (Handler, *Record) {
@@ -388,7 +388,7 @@ func TestFailoverHandler(t *testing.T) {
 	}
 }
 
-// https://github.com/inconshreveable/log15/issues/16
+// https://github.com/gernoteger/log15/issues/16
 func TestIndependentSetHandler(t *testing.T) {
 	t.Parallel()
 
@@ -401,7 +401,7 @@ func TestIndependentSetHandler(t *testing.T) {
 	}
 }
 
-// https://github.com/inconshreveable/log15/issues/16
+// https://github.com/gernoteger/log15/issues/16
 func TestInheritHandler(t *testing.T) {
 	t.Parallel()
 
@@ -481,7 +481,7 @@ func TestCallerFuncHandler(t *testing.T) {
 	}
 }
 
-// https://github.com/inconshreveable/log15/issues/27
+// https://github.com/gernoteger/log15/issues/27
 func TestCallerStackHandler(t *testing.T) {
 	t.Parallel()
 
@@ -537,7 +537,7 @@ func TestCallerStackHandler(t *testing.T) {
 // records and a handler that buckets them based on the index passed in the context.
 // if the logger is not concurrent-safe then the values in the buckets will not all be the same
 //
-// https://github.com/inconshreveable/log15/pull/30
+// https://github.com/gernoteger/log15/pull/30
 func TestConcurrent(t *testing.T) {
 	root := New()
 	// this was the first value that triggered

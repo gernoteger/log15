@@ -13,7 +13,7 @@ import (
 
 	"geger.at/logsExplorer/outputs"
 	"github.com/gernoteger/mapstructure-hooks"
-	"github.com/inconshreveable/log15"
+	"github.com/gernoteger/log15"
 )
 
 func init() {

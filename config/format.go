@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/inconshreveable/log15"
+	"github.com/gernoteger/log15"
 )
 
 type Fmt int

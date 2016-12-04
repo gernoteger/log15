@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	"github.com/gernoteger/mapstructure-hooks"
-	"github.com/inconshreveable/log15"
+	"github.com/gernoteger/log15"
 )
 
 // LoggerConfig is the central configuration that will be populated from logfiles by various Method

@@ -1,7 +1,7 @@
 package config_test
 
 import (
-	"github.com/inconshreveable/log15/config"
+	"github.com/gernoteger/log15/config"
 	"gopkg.in/yaml.v2"
 )
 
